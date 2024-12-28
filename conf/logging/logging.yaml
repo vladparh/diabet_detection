@@ -1,0 +1,7 @@
+label: mlflow
+
+# MLFlow
+experiment_name: diabet_detection
+run_name: model v1.0
+mlflow_save_dir: "."
+tracking_uri: http://127.0.0.1:5000

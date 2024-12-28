@@ -1,0 +1,5 @@
+defaults:
+  - training: training
+  - logging: logging
+  - data_loading: data_loading
+  - model: model

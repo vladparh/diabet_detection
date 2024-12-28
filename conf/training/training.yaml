@@ -1,0 +1,5 @@
+train_batch_size: 64
+val_batch_size: 2000
+num_workers: 2
+lr: 1e-4
+num_epochs: 10

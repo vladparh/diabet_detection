@@ -1,0 +1,2 @@
+train_data_path: ./data/diabetes_binary_5050split_health_indicators_BRFSS2015.csv
+scaler_path: ./saved_models/scaler.pkl
