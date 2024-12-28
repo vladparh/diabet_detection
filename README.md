@@ -5,6 +5,35 @@
 заболевание, поэтому хотелось бы, чтобы люди, дав ответы на несколько вопросов,
 могли узнать, что у них, вероятно, диабет и им нужно обратиться к врачу.
 
+## Структура проекта
+```
+├───conf <- папка с конфигами
+│   ├───data_loading
+│   │   └───data_loading.yaml
+│   ├───logging
+│   │   └───logging.yaml
+│   ├───model
+│   │   └───model.yaml
+│   ├───training
+│   │   └───model.yaml
+│   └───config.yaml
+├───diabet_detector <- сорцы кода
+│   ├───.gitignore
+│   ├───data_preprocessing.py
+│   ├───logger.py
+│   ├───model.py
+│   └───trainer.py
+├───.gitignore
+├───.pre-commit-config.yaml
+├───Dockerfile
+├───LICENCE
+├───README.md
+├───infer.py
+├───poetry.lock
+├───pyproject.toml
+└───train.py
+```
+
 ## Данные
 
 Был выбран следующий датасет:
