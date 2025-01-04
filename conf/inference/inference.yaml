@@ -1,0 +1,2 @@
+data_path: data/test_data.csv
+model_path: saved_models/model_v1.0/model_val_AP=0.79.ckpt

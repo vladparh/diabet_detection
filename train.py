@@ -1,5 +1,7 @@
 import hydra
+import pandas as pd
 import pytorch_lightning as pl
+from dvc.api import DVCFileSystem
 from omegaconf import DictConfig
 from torch.utils.data import DataLoader
 
@@ -11,8 +13,11 @@ from diabet_detector.trainer import DiabetDetector
 
 @hydra.main(version_base=None, config_path="conf", config_name="config")
 def main(config: DictConfig):
+    fs = DVCFileSystem()
+    with fs.open(config["data_loading"]["train_data_path"]) as file:
+        data = pd.read_csv(file)
     train_dataset, val_dataset = prepare_data_for_training(
-        data_path=config["data_loading"]["train_data_path"],
+        data=data,
         path_to_save_scaler=config["data_loading"]["scaler_path"],
     )
     train_loader = DataLoader(
@@ -32,6 +37,9 @@ def main(config: DictConfig):
     module = DiabetDetector(model, None, lr=config["training"]["lr"])
 
     logger = get_logger(config["logging"])
+    logger.log_hyperparams(
+        {"p_dropout": config["model"]["p_dropout"], "lr": config["training"]["lr"]}
+    )
 
     model_checkpoint = pl.callbacks.ModelCheckpoint(
         dirpath=config["model"]["save_dir"],

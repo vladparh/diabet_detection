@@ -1,0 +1,5 @@
+outs:
+- md5: 15eb54b69522b587d1344d270de156c9
+  size: 272811
+  hash: md5
+  path: model_val_AP=0.79.ckpt

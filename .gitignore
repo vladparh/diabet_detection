@@ -1,4 +1,3 @@
-mlruns
-data
-saved_models
-outputs
+mlruns/
+outputs/
+.idea/

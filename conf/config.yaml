@@ -3,3 +3,4 @@ defaults:
   - logging: logging
   - data_loading: data_loading
   - model: model
+  - inference: inference

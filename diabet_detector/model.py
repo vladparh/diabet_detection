@@ -5,7 +5,7 @@ from torch import nn
 class SimpleClassifier(nn.Module):
     """Fully connected neural network for binary classification"""
 
-    def __init__(self, p_dropout=0.1):
+    def __init__(self, p_dropout=0.0):
         super().__init__()
         self.net = nn.Sequential(
             nn.Linear(21, 42),

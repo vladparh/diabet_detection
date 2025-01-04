@@ -6,10 +6,10 @@ from torchmetrics.classification import BinaryAveragePrecision
 class DiabetDetector(pl.LightningModule):
     """Module for training and evaluating model"""
 
-    def __init__(self, model, weights=None, lr=1e-4):
+    def __init__(self, model, class_weights=None, lr=1e-4):
         super().__init__()
         self.model = model
-        self.class_weights = weights
+        self.class_weights = class_weights
         self.loss_fn = torch.nn.BCELoss()
         self.lr = lr
         self.metric = BinaryAveragePrecision()

@@ -3,23 +3,24 @@ from typing import Tuple
 import joblib
 import pandas as pd
 import torch
+from dvc.api import DVCFileSystem
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from torch.utils.data import TensorDataset
 
 
 def prepare_data_for_training(
-    data_path: str,
+    data: pd.DataFrame,
     test_size: float = 0.2,
     random_state: int = 123,
     path_to_save_scaler: str = None,
 ) -> Tuple[TensorDataset, TensorDataset]:
-    """Function for prepare data from csv-file. Returns datasets for training and validation"""
-    df = pd.read_csv(data_path)
-    df.drop_duplicates(inplace=True)
+    """Function for prepare data for training. Returns datasets for training and validation"""
+
+    data.drop_duplicates(inplace=True)
     train_data, test_data, train_labels, test_labels = train_test_split(
-        df.drop(columns=["Diabetes_binary"]),
-        df["Diabetes_binary"],
+        data.drop(columns=["Diabetes_binary"]),
+        data["Diabetes_binary"],
         test_size=test_size,
         random_state=random_state,
     )
@@ -55,7 +56,9 @@ def prepare_data_for_training(
 
 def preprocess_data(data: pd.DataFrame, path_to_scaler: str) -> torch.Tensor:
     """Modify data from pandas DataFrame to torch Tensor"""
-    scaler = joblib.load(path_to_scaler)
+    fs = DVCFileSystem()
+    with fs.open(path_to_scaler) as file:
+        scaler = joblib.load(file)
     data[
         ["BMI", "GenHlth", "MentHlth", "PhysHlth", "Age", "Education", "Income"]
     ] = scaler.transform(
