@@ -32,6 +32,7 @@
 │   ├───logger.py
 │   ├───model.py
 │   └───trainer.py
+├───plots <- графики
 ├───saved_models <- сохранённые модели
 │   ├───model_v1.0
 │   │   └───model_val_AP=0.79.ckpt.dvc
@@ -46,6 +47,7 @@
 ├───infer.py
 ├───poetry.lock
 ├───pyproject.toml
+├───requiremets.txt
 └───train.py
 ```
 
@@ -62,8 +64,8 @@ https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset/da
 ## Модель
 
 В качестве модели используется полносвязная нейронная сеть с
-нескольким внутренними слоями и одним выходом. Для её реализации использована библиотека pytorch. Препроцессинг данных проводится с
-помощью библиотеки scikit-learn.
+нескольким внутренними слоями и одним выходом. Для её реализации использована библиотека `pytorch`. Препроцессинг данных проводится с
+помощью библиотеки `scikit-learn`.
 
 ## Предсказание
 
@@ -71,3 +73,13 @@ https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset/da
 Модель можно обернуть в сервис, где пользователь сначала отвечает на вопросы и
 потом на основании данных ответов выводится вероятность того, что у него
 преддиабет или диабет.
+
+## Начало работы
+Для запуска проекта с помощью docker, нужно создать сначала docker-образ:
+```
+docker build -t diabet_detection .
+```
+Затем, для запуска, например, infer.py нужно использовать команду:
+```
+docker run --rm -v "$(pwd)/usr/src/app" diabet_detection python infer.py
+```
